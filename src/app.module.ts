@@ -3,24 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TypeOrmConfig } from './config/database.config';
 import { PrayerModule } from './prayer/prayer.module';
 import { UserModule } from './users/users.module';
 
 @Module({
-  imports: [
-    UserModule,
-    PrayerModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'jvdm',
-      synchronize: true,
-      autoLoadEntities: true,
-    }),
-  ],
+  imports: [PrayerModule, UserModule, TypeOrmModule.forRoot(TypeOrmConfig)],
   controllers: [AppController],
   providers: [AppService],
 })

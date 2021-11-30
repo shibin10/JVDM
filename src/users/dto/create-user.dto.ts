@@ -1,5 +1,5 @@
 export class UserDto {
-  uid: number;
+  id: number;
   nam: string;
   //address: string;
   place: string;

@@ -8,18 +8,23 @@ export class User {
   @Column()
   name: string;
 
-  // @Column()
-  //address: string;
-
+  @Column()
+  address: string;
+  /*
   @Column()
   place: string;
+
+  @Column()
+  age: number;
+
+  @Column()
+  year: number;
 
   @Column()
   uname: string;
 
   @Column()
-  age: string;
-
-  @Column()
-  year: string;
+  psw: string;
+  
+  */
 }

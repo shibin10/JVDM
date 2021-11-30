@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Prayer } from './dto/prayer.dto';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+
+import { PrayerDto } from './dto/prayer-dto.dto';
+import { Prayer } from './prayer.entity';
 import { PrayerService } from './prayer.service';
 
 @Controller('prayer')
@@ -7,12 +17,23 @@ export class PrayerController {
   constructor(private prayerService: PrayerService) {}
 
   @Post()
-  async create(@Body() details: Prayer) {
-    this.prayerService.Create(details);
+  async create(@Body() prayerDto: PrayerDto): Promise<any> {
+    return this.prayerService.create(prayerDto);
   }
 
   @Get()
-  getallUsers() {
-    return this.prayerService.getUsers();
+  index(): Promise<Prayer[]> {
+    return this.prayerService.findAll();
+  }
+
+  @Put(':pid')
+  async update(@Param('pid') pid, @Body() prayerDto: PrayerDto): Promise<any> {
+    prayerDto.pid = Number(pid);
+    console.log('update #' + prayerDto.pid);
+    return this.prayerService.update(prayerDto);
+  }
+  @Delete(':id')
+  delete(@Param('id') [id]): Promise<void> {
+    return this.prayerService.remove(id);
   }
 }
