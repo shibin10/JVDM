@@ -1,5 +1,5 @@
 export class PrayerDto {
-  pid: number;
+  prayerId: number;
   place: string;
   /* time: string;
   day: string;

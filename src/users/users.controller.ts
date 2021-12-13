@@ -10,12 +10,15 @@ import {
 import { UserDto } from './dto/create-user.dto';
 import { UserService } from './users.service';
 import { User } from './user.entity';
-import { FindRelationsNotFoundError } from 'typeorm';
-import { stringify } from 'querystring';
+import { RoleDto } from '../roles/dto/roles-dto.dto';
+import { RolesService } from '../roles/roles.service';
 
 @Controller('users')
 export class UserController {
-  constructor(private UserService: UserService) {}
+  constructor(
+    private UserService: UserService,
+  ) // private rolesService: RolesService,
+  {}
 
   @Post()
   async create(@Body() user: UserDto): Promise<any> {
@@ -29,8 +32,8 @@ export class UserController {
 
   @Put(':id')
   async update(@Param('id') id, @Body() user: UserDto): Promise<any> {
-    user.id = Number(id);
-    console.log('Update #' + user.id);
+    user.userId = Number(id);
+    console.log('Update #' + user.userId);
     return this.UserService.update(user);
   }
 

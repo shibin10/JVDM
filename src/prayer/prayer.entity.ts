@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Prayer {
   @PrimaryGeneratedColumn()
-  pid: number;
+  prayerId: number;
 
   @Column()
   title: string;

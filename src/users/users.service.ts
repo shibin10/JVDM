@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { UpdateResult } from 'typeorm';
 import { UserDto } from './dto/create-user.dto';
+import { Roles } from '../roles/roles.entity';
+import { RoleDto } from '../roles/dto/roles-dto.dto';
 
 //export type User = User[] ;
 
@@ -14,8 +16,10 @@ export class UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findByID(uname: string): Promise<any> {
-    return await this.usersRepository.find();
+  async findByID(username: string): Promise<any> {
+    return await this.usersRepository.findOne({
+      where: { username: username },
+    });
   }
 
   async findAll(): Promise<User[]> {
@@ -27,7 +31,7 @@ export class UserService {
   }
 
   async update(user: UserDto): Promise<UpdateResult> {
-    return await this.usersRepository.update(user.id, user);
+    return await this.usersRepository.update(user.userId, user);
   }
 
   async remove(id): Promise<void> {

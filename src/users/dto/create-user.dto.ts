@@ -1,10 +1,11 @@
 export class UserDto {
-  id: number;
-  nam: string;
+  userId: number;
+  name: string;
   //address: string;
   place: string;
-  uname: string;
-  psw: string;
+  username: string;
+  password: string;
   age: number;
   year: number;
+  roleId: number;
 }

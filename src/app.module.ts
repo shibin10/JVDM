@@ -6,15 +6,21 @@ import { AppService } from './app.service';
 import { TypeOrmConfig } from './config/database.config';
 import { PrayerModule } from './prayer/prayer.module';
 import { UserModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { JwtModule } from '@nestjs/jwt';
+import { RolesModule } from './roles/roles.module';
+import { AttendeesModule } from './attendees/attendees.module';
+import { ScheduleModule } from './schedule/schedule.module';
+import { AssetsModule } from './assets/assets.module';
 
 @Module({
   imports: [
     PrayerModule,
     UserModule,
+    AssetsModule,
     TypeOrmModule.forRoot(TypeOrmConfig),
-    AuthModule,
+    AttendeesModule,
+    RolesModule,
+
+    ScheduleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

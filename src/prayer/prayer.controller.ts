@@ -28,8 +28,8 @@ export class PrayerController {
 
   @Put(':pid')
   async update(@Param('pid') pid, @Body() prayerDto: PrayerDto): Promise<any> {
-    prayerDto.pid = Number(pid);
-    console.log('update #' + prayerDto.pid);
+    prayerDto.prayerId = Number(pid);
+    console.log('update #' + prayerDto.prayerId);
     return this.prayerService.update(prayerDto);
   }
   @Delete(':id')

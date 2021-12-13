@@ -19,7 +19,7 @@ export class PrayerService {
   }
 
   async update(prayer: PrayerDto): Promise<UpdateResult> {
-    return await this.PrayerRepository.update(prayer.pid, prayer);
+    return await this.PrayerRepository.update(prayer.prayerId, prayer);
   }
 
   async remove(id): Promise<void> {
