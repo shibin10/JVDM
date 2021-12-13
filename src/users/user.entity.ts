@@ -19,12 +19,10 @@ export class User {
 
   @Column()
   year: number;
-
+  */
   @Column()
   uname: string;
 
   @Column()
   psw: string;
-  
-  */
 }

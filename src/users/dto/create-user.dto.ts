@@ -4,6 +4,7 @@ export class UserDto {
   //address: string;
   place: string;
   uname: string;
+  psw: string;
   age: number;
   year: number;
 }
