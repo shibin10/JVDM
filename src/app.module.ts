@@ -10,6 +10,7 @@ import { RolesModule } from './roles/roles.module';
 import { AttendeesModule } from './attendees/attendees.module';
 import { ScheduleModule } from './schedule/schedule.module';
 import { AssetsModule } from './assets/assets.module';
+import { AssetsManageModule } from './assets Manage/assets.module';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { AssetsModule } from './assets/assets.module';
     TypeOrmModule.forRoot(TypeOrmConfig),
     AttendeesModule,
     RolesModule,
-
+    AssetsManageModule,
     ScheduleModule,
   ],
   controllers: [AppController],
