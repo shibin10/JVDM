@@ -14,6 +14,10 @@ export class PrayerService {
     return await this.PrayerRepository.find();
   }
 
+  async getById(prayerId: number): Promise<Prayer> {
+    return this.PrayerRepository.findOne({ where: { prayerId: prayerId } });
+  }
+
   async create(prayer: PrayerDto): Promise<Prayer> {
     return await this.PrayerRepository.save(prayer);
   }
@@ -25,4 +29,18 @@ export class PrayerService {
   async remove(id): Promise<void> {
     await this.PrayerRepository.delete(id);
   }
+
+  // async getTaskWithFilters(time: string): Promise<Prayer[]> {
+  // return await this.PrayerRepository.find({ where: { time: time } });
+  // }
+  /*
+  async getTaskWithFilters(prayer: PrayerDto): Promise<Prayer[]> {
+    const time = prayer;
+    let tasks = this.findAll();
+
+    if (time) {
+      tasks = await tasks.filter();
+    }
+    return tasks;
+  }*/
 }

@@ -7,7 +7,7 @@ export class Prayer {
 
   @Column()
   title: string;
-  /*
+
   @Column()
   time: string;
 
@@ -16,5 +16,4 @@ export class Prayer {
 
   @Column()
   psw: number;
-  */
 }

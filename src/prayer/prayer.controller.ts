@@ -6,8 +6,11 @@ import {
   Param,
   Post,
   Put,
+  Query,
+  Req,
 } from '@nestjs/common';
-
+import { get } from 'http';
+import { Request } from 'express';
 import { PrayerDto } from './dto/prayer-dto.dto';
 import { Prayer } from './prayer.entity';
 import { PrayerService } from './prayer.service';
@@ -20,10 +23,14 @@ export class PrayerController {
   async create(@Body() prayerDto: PrayerDto): Promise<any> {
     return this.prayerService.create(prayerDto);
   }
-
   @Get()
   index(): Promise<Prayer[]> {
     return this.prayerService.findAll();
+  }
+
+  @Get(':prayerId')
+  async getById(@Param('prayerId') prayerId: number): Promise<Prayer> {
+    return this.prayerService.getById(prayerId);
   }
 
   @Put(':pid')
@@ -36,4 +43,20 @@ export class PrayerController {
   delete(@Param('id') [id]): Promise<void> {
     return this.prayerService.remove(id);
   }
+  /*
+  @Get(':details')
+  getTasks(@Query('details') prayer: PrayerDto): Promise<Prayer[]> {
+    if (Object.keys(prayer).length) {
+      return this.prayerService.getTaskWithFilters(prayer);
+    }
+  }
+
+
+@Get('search')
+async backend(@Req() req:Request){
+  const builder=await this.prayerService.queryBuilder('Prayer');
+
+  if(req.query.s){
+    builder.where
+  }*/
 }

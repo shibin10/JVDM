@@ -6,22 +6,19 @@ import {
   Put,
   Delete,
   Param,
+  ParseBoolPipe,
+  Query,
 } from '@nestjs/common';
 import { UserDto } from './dto/create-user.dto';
 import { UserService } from './users.service';
 import { User } from './user.entity';
-import { RoleDto } from '../roles/dto/roles-dto.dto';
-import { RolesService } from '../roles/roles.service';
 
 @Controller('users')
 export class UserController {
-  constructor(
-    private UserService: UserService,
-  ) // private rolesService: RolesService,
-  {}
+  constructor(private UserService: UserService) {}
 
   @Post()
-  async create(@Body() user: UserDto): Promise<any> {
+  async create(@Body() user: UserDto) {
     return this.UserService.create(user);
   }
 
@@ -30,15 +27,26 @@ export class UserController {
     return this.UserService.findAll();
   }
 
+  @Get(':users')
+  async getById(@Param('users') id: number) {
+    return this.UserService.getById(id);
+  }
+
   @Put(':id')
-  async update(@Param('id') id, @Body() user: UserDto): Promise<any> {
-    user.userId = Number(id);
-    console.log('Update #' + user.userId);
+  async update(@Param('id') id, @Body() user: UserDto) {
+    user.id = Number(id);
+    console.log('Update #' + user.id);
     return this.UserService.update(user);
   }
 
   @Delete(':id')
-  delete(@Param('id') [id]): Promise<void> {
+  delete(@Param('id') [id]) {
     return this.UserService.remove(id);
+  }
+
+  @Get(':role')
+  async getAllUsers(@Query('role') roleId: number) {
+    console.log(roleId);
+    return this.UserService.getAllUsers(roleId);
   }
 }

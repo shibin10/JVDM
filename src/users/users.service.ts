@@ -4,10 +4,6 @@ import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { UpdateResult } from 'typeorm';
 import { UserDto } from './dto/create-user.dto';
-import { Roles } from '../roles/roles.entity';
-import { RoleDto } from '../roles/dto/roles-dto.dto';
-
-//export type User = User[] ;
 
 @Injectable()
 export class UserService {
@@ -16,28 +12,27 @@ export class UserService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findByID(username: string): Promise<any> {
-    return await this.usersRepository.findOne({
-      where: { username: username },
-    });
+  async getById(id: number) {
+    return this.usersRepository.findOne({ where: { id: id } });
   }
 
   async findAll(): Promise<User[]> {
     return await this.usersRepository.find();
   }
 
-  async create(user: UserDto): Promise<User> {
+  async create(user: UserDto) {
     return await this.usersRepository.save(user);
   }
 
-  async update(user: UserDto): Promise<UpdateResult> {
-    return await this.usersRepository.update(user.userId, user);
+  async update(user: UserDto) {
+    return await this.usersRepository.update(user.id, user);
   }
 
-  async remove(id): Promise<void> {
+  async remove(id) {
     await this.usersRepository.delete(id);
   }
-}
-function Where(Where: any, arg1: { User: typeof User; '': boolean }) {
-  throw new Error('Function not implemented.');
+
+  async getAllUsers(roleId: number) {
+    return this.usersRepository.find({ where: { roleId: roleId } });
+  }
 }

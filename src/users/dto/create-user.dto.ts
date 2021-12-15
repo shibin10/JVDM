@@ -1,7 +1,7 @@
 export class UserDto {
-  userId: number;
+  id: number;
   name: string;
-  //address: string;
+  address: string;
   place: string;
   username: string;
   password: string;

@@ -1,16 +1,9 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-} from 'typeorm';
-import { Roles } from '../roles/roles.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  userId: number;
+  id: number;
 
   @Column()
   name: string;
@@ -26,6 +19,10 @@ export class User {
 
   @column({nullable:true})
   email:string;
+
+  @Column()
+  phone:number;
+  
   @Column()
   age: number;
 
