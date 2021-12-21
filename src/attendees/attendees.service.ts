@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { create } from 'domain';
 import { Repository, UpdateResult } from 'typeorm';
 import { Attendee } from './atendee.entity';
 import { AttendeeDto } from './dto/attendee-dto.dto';
@@ -12,22 +11,26 @@ export class AttendeesService {
     private attendeeRepository: Repository<Attendee>,
   ) {}
 
-  async create(attendeeDto: AttendeeDto): Promise<Attendee> {
+  async create(attendeeDto: AttendeeDto) {
     return await this.attendeeRepository.save(attendeeDto);
   }
 
-  async findAll(): Promise<Attendee[]> {
-    return await this.attendeeRepository.find();
+  async getAllAttendee(query: any) {
+    console.log(query);
+    return this.attendeeRepository.find({ where: query });
   }
-
-  async update(attendeeDto: AttendeeDto): Promise<UpdateResult> {
+  async update(attendeeDto: AttendeeDto) {
     return await this.attendeeRepository.update(
       attendeeDto.prayerId,
       attendeeDto,
     );
   }
 
-  async remove(prayerId): Promise<void> {
+  async remove(prayerId) {
     await this.attendeeRepository.delete(prayerId);
+  }
+
+  async getById(id: number) {
+    return this.attendeeRepository.findOne({ where: { userId: id } });
   }
 }

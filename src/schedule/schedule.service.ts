@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 import { ScheduleDto } from './dto/schedule-dto.dto';
 import { schedule } from './schedule.entity';
 
@@ -11,22 +11,30 @@ export class ScheduleService {
     private scheduleRepository: Repository<schedule>,
   ) {}
 
-  async create(scheduleDto: ScheduleDto): Promise<schedule> {
+  async create(scheduleDto: ScheduleDto) {
     return await this.scheduleRepository.save(scheduleDto);
   }
 
-  async findAll(): Promise<schedule[]> {
+  async findAll() {
     return await this.scheduleRepository.find();
   }
 
-  async update(scheduleDto: ScheduleDto): Promise<UpdateResult> {
+  async update(scheduleDto: ScheduleDto) {
     return await this.scheduleRepository.update(
       scheduleDto.userId,
       scheduleDto,
     );
   }
 
-  async remove(roleId): Promise<void> {
-    await this.scheduleRepository.delete(roleId);
+  async remove(userId) {
+    return await this.scheduleRepository.delete(userId);
+  }
+
+  async getAllSchedule(query: any) {
+    return this.scheduleRepository.find({ where: query });
+  }
+
+  async getById(id: number) {
+    return this.scheduleRepository.findOne({ where: { userId: id } });
   }
 }

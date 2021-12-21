@@ -11,19 +11,24 @@ export class AssetsService {
     private assetRepository: Repository<Assets>,
   ) {}
 
-  async create(assetDto: assetDto): Promise<Assets> {
+  async create(assetDto: assetDto) {
     return await this.assetRepository.save(assetDto);
   }
 
-  async findAll(): Promise<Assets[]> {
-    return await this.assetRepository.find();
+  async getAllAssets(query: any) {
+    console.log(query);
+    return this.assetRepository.find({ where: query });
   }
 
-  async update(assetDto: assetDto): Promise<UpdateResult> {
+  async update(assetDto: assetDto) {
     return await this.assetRepository.update(assetDto.assetId, assetDto);
   }
 
-  async remove(assetId): Promise<void> {
+  async remove(assetId) {
     await this.assetRepository.delete(assetId);
+  }
+
+  async getById(id: number) {
+    return this.assetRepository.findOne({ where: { assetId: id } });
   }
 }

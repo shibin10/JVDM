@@ -10,37 +10,25 @@ export class PrayerService {
     @InjectRepository(Prayer)
     private PrayerRepository: Repository<Prayer>,
   ) {}
-  async findAll(): Promise<Prayer[]> {
-    return await this.PrayerRepository.find();
+
+  async getAllPrayer(query: any) {
+    console.log(query);
+    return this.PrayerRepository.find({ where: query });
   }
 
-  async getById(prayerId: number): Promise<Prayer> {
+  async getById(prayerId: number) {
     return this.PrayerRepository.findOne({ where: { prayerId: prayerId } });
   }
 
-  async create(prayer: PrayerDto): Promise<Prayer> {
+  async create(prayer: PrayerDto) {
     return await this.PrayerRepository.save(prayer);
   }
 
-  async update(prayer: PrayerDto): Promise<UpdateResult> {
+  async update(prayer: PrayerDto) {
     return await this.PrayerRepository.update(prayer.prayerId, prayer);
   }
 
-  async remove(id): Promise<void> {
-    await this.PrayerRepository.delete(id);
+  async remove(id) {
+    return await this.PrayerRepository.delete(id);
   }
-
-  // async getTaskWithFilters(time: string): Promise<Prayer[]> {
-  // return await this.PrayerRepository.find({ where: { time: time } });
-  // }
-  /*
-  async getTaskWithFilters(prayer: PrayerDto): Promise<Prayer[]> {
-    const time = prayer;
-    let tasks = this.findAll();
-
-    if (time) {
-      tasks = await tasks.filter();
-    }
-    return tasks;
-  }*/
 }

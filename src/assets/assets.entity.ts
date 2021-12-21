@@ -10,4 +10,10 @@ export class Assets {
 
   @Column()
   quantity: number;
+
+  @Column()
+  company: string;
+
+  @Column()
+  prayerGroup: string;
 }

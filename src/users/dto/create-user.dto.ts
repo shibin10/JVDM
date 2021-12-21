@@ -7,5 +7,7 @@ export class UserDto {
   password: string;
   age: number;
   year: number;
+  phone: number;
   roleId: number;
+  status: string;
 }

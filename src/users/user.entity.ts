@@ -13,30 +13,28 @@ export class User {
 
   @Column()
   address: string;
-  /*
+
+  @Column()
+  status: string;
+
   @Column()
   place: string;
 
-  @column({nullable:true})
-  email:string;
+  @Column()
+  email: string;
 
   @Column()
-  phone:number;
-  
+  phone: number;
+
   @Column()
   age: number;
 
   @Column()
   year: number;
- 
+
   @Column()
   username: string;
 
   @Column()
   password: string;
- 
-
-  @OneToOne(() => Roles)
-  @JoinColumn()
-  role: Roles;  */
 }

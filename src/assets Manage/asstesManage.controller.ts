@@ -6,38 +6,48 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 
 import { AssetManage } from './assetsManage.entity';
 import { AssetsManageService } from './assetsManage.service';
 import { assetManageDto } from './dto/assetsManage-dto.dto';
 
-@Controller('assetmanage')
+@Controller('assetManage')
 export class AssetsManageController {
-  constructor(private assetsmanageService: AssetsManageService) {}
+  constructor(private assetsManageService: AssetsManageService) {}
 
   @Post()
-  async create(@Body() assetDto: assetManageDto): Promise<any> {
-    return this.assetsmanageService.create(assetDto);
+  async create(@Body() assetDto: assetManageDto) {
+    return this.assetsManageService.create(assetDto);
   }
 
   @Get()
-  index(): Promise<AssetManage[]> {
-    return this.assetsmanageService.findAll();
+  async getAllAssets(@Query('assetId') assetId: number) {
+    const Query: any = {};
+
+    if (assetId) {
+      Query.assetId = assetId;
+    }
+
+    const data = this.assetsManageService.getAllAssets(Query);
+    return data;
+  }
+
+  @Get(':assetId')
+  async getById(@Param('assetId') id: number) {
+    return this.assetsManageService.getById(id);
   }
 
   @Put(':assetId')
-  async update(
-    @Param('assetId') assetId,
-    @Body() assetDto: assetManageDto,
-  ): Promise<any> {
+  async update(@Param('assetId') assetId, @Body() assetDto: assetManageDto) {
     assetDto.assetId = Number(assetId);
     console.log('update #' + assetDto.assetId);
-    return this.assetsmanageService.update(assetDto);
+    return this.assetsManageService.update(assetDto);
   }
 
   @Delete(':assetId')
-  delete(@Param('assetId') [assetId]): Promise<void> {
-    return this.assetsmanageService.remove(assetId);
+  delete(@Param('assetId') [assetId]) {
+    return this.assetsManageService.remove(assetId);
   }
 }

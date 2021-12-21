@@ -11,23 +11,34 @@ import {
 } from '@nestjs/common';
 import { UserDto } from './dto/create-user.dto';
 import { UserService } from './users.service';
-import { User } from './user.entity';
 
 @Controller('users')
 export class UserController {
   constructor(private UserService: UserService) {}
+
+  @Get()
+  async getAllUsers(
+    @Query('roleId') roleId: number,
+    @Query('status') status: string,
+  ) {
+    const userQuery: any = {};
+
+    if (roleId) {
+      userQuery.roleId = roleId;
+    }
+    if (status) {
+      userQuery.status = status;
+    }
+    const data = this.UserService.getAllUsers(userQuery);
+    return data;
+  }
 
   @Post()
   async create(@Body() user: UserDto) {
     return this.UserService.create(user);
   }
 
-  @Get()
-  index(): Promise<User[]> {
-    return this.UserService.findAll();
-  }
-
-  @Get(':users')
+  @Get(':id')
   async getById(@Param('users') id: number) {
     return this.UserService.getById(id);
   }
@@ -40,13 +51,8 @@ export class UserController {
   }
 
   @Delete(':id')
-  delete(@Param('id') [id]) {
-    return this.UserService.remove(id);
-  }
-
-  @Get(':role')
-  async getAllUsers(@Query('role') roleId: number) {
-    console.log(roleId);
-    return this.UserService.getAllUsers(roleId);
+  async deleteOne(@Param('id') id: string) {
+    const data = this.UserService.deleteOne(Number(id));
+    return data;
   }
 }

@@ -1,5 +1,7 @@
 export class assetDto {
   assetId: number;
   name: string;
-  quatity: string;
+  quantity: number;
+  company: string;
+  prayerGroup: string;
 }

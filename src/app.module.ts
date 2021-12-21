@@ -11,6 +11,7 @@ import { AttendeesModule } from './attendees/attendees.module';
 import { ScheduleModule } from './schedule/schedule.module';
 import { AssetsModule } from './assets/assets.module';
 import { AssetsManageModule } from './assets Manage/assets.module';
+import { LocationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AssetsManageModule } from './assets Manage/assets.module';
     RolesModule,
     AssetsManageModule,
     ScheduleModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

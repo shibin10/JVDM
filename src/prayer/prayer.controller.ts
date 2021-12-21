@@ -7,7 +7,6 @@ import {
   Post,
   Put,
   Query,
-  Req,
 } from '@nestjs/common';
 import { get } from 'http';
 import { Request } from 'express';
@@ -20,43 +19,37 @@ export class PrayerController {
   constructor(private prayerService: PrayerService) {}
 
   @Post()
-  async create(@Body() prayerDto: PrayerDto): Promise<any> {
+  async create(@Body() prayerDto: PrayerDto) {
     return this.prayerService.create(prayerDto);
   }
+
   @Get()
-  index(): Promise<Prayer[]> {
-    return this.prayerService.findAll();
+  async getAllPrayer(@Query('prayerId') prayerId: number) {
+    const userQuery: any = {};
+
+    if (prayerId) {
+      userQuery.prayerId = prayerId;
+    }
+
+    const data = this.prayerService.getAllPrayer(userQuery);
+    return data;
   }
 
   @Get(':prayerId')
-  async getById(@Param('prayerId') prayerId: number): Promise<Prayer> {
+  async getById(@Param('prayerId') prayerId: number) {
     return this.prayerService.getById(prayerId);
   }
 
   @Put(':pid')
-  async update(@Param('pid') pid, @Body() prayerDto: PrayerDto): Promise<any> {
+  async update(@Param('pid') pid, @Body() prayerDto: PrayerDto) {
     prayerDto.prayerId = Number(pid);
     console.log('update #' + prayerDto.prayerId);
     return this.prayerService.update(prayerDto);
   }
+
   @Delete(':id')
-  delete(@Param('id') [id]): Promise<void> {
+  async delete(@Param('id') [id]) {
+    console.log('id');
     return this.prayerService.remove(id);
   }
-  /*
-  @Get(':details')
-  getTasks(@Query('details') prayer: PrayerDto): Promise<Prayer[]> {
-    if (Object.keys(prayer).length) {
-      return this.prayerService.getTaskWithFilters(prayer);
-    }
-  }
-
-
-@Get('search')
-async backend(@Req() req:Request){
-  const builder=await this.prayerService.queryBuilder('Prayer');
-
-  if(req.query.s){
-    builder.where
-  }*/
 }

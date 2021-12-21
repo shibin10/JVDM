@@ -11,19 +11,24 @@ export class RolesService {
     private roleRepository: Repository<Roles>,
   ) {}
 
-  async create(role: RoleDto): Promise<Roles> {
+  async create(role: RoleDto) {
     return await this.roleRepository.save(role);
   }
 
-  async findAll(): Promise<Roles[]> {
-    return await this.roleRepository.find();
+  async getAllRole(query: any) {
+    console.log(query);
+    return this.roleRepository.find({ where: query });
   }
 
-  async update(role: RoleDto): Promise<UpdateResult> {
+  async update(role: RoleDto) {
     return await this.roleRepository.update(role.roleId, role);
   }
 
-  async remove(roleId): Promise<void> {
+  async remove(roleId) {
     await this.roleRepository.delete(roleId);
+  }
+
+  async getById(id: number) {
+    return this.roleRepository.findOne({ where: { roleId: id } });
   }
 }
