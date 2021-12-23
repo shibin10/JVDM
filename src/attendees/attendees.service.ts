@@ -26,8 +26,8 @@ export class AttendeesService {
     );
   }
 
-  async remove(prayerId) {
-    await this.attendeeRepository.delete(prayerId);
+  async remove(id) {
+    await this.attendeeRepository.delete(id);
   }
 
   async getById(id: number) {

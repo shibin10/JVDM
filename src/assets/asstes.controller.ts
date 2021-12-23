@@ -46,8 +46,8 @@ export class AssetsController {
 
   @Put(':assetId')
   async update(@Param('assetId') assetId, @Body() assetDto: assetDto) {
-    assetDto.assetId = Number(assetId);
-    console.log('update #' + assetDto.assetId);
+    assetDto.id = Number(assetId);
+    console.log('update #' + assetDto.id);
     return this.AssetsService.update(assetDto);
   }
 

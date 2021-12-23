@@ -21,14 +21,14 @@ export class AssetsService {
   }
 
   async update(assetDto: assetDto) {
-    return await this.assetRepository.update(assetDto.assetId, assetDto);
+    return await this.assetRepository.update(assetDto.id, assetDto);
   }
 
-  async remove(assetId) {
-    await this.assetRepository.delete(assetId);
+  async remove(id) {
+    await this.assetRepository.delete(id);
   }
 
   async getById(id: number) {
-    return this.assetRepository.findOne({ where: { assetId: id } });
+    return this.assetRepository.findOne({ where: { id: id } });
   }
 }

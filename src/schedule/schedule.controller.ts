@@ -31,22 +31,21 @@ export class ScheduleController {
   async getById(@Param('id') id: number) {
     return this.scheduleService.getById(id);
   }
-  
 
   @Post()
   async create(@Body() scheduleDto: ScheduleDto) {
     return this.scheduleService.create(scheduleDto);
   }
 
-  @Put(':userId')
-  async update(@Param('userId') userId, @Body() scheduleDto: ScheduleDto) {
-    scheduleDto.userId = Number(userId);
-    console.log('update #' + scheduleDto.userId);
+  @Put(':id')
+  async update(@Param('id') id, @Body() scheduleDto: ScheduleDto) {
+    scheduleDto.id = Number(id);
+    console.log('update #' + scheduleDto.id);
     return this.scheduleService.update(scheduleDto);
   }
 
-  @Delete(':userId')
-  delete(@Param('userId') [userId]) {
-    return this.scheduleService.remove(userId);
+  @Delete(':id')
+  delete(@Param('id') [id]) {
+    return this.scheduleService.remove(id);
   }
 }

@@ -17,7 +17,7 @@ export class PrayerService {
   }
 
   async getById(prayerId: number) {
-    return this.PrayerRepository.findOne({ where: { prayerId: prayerId } });
+    return this.PrayerRepository.findOne({ where: { id: prayerId } });
   }
 
   async create(prayer: PrayerDto) {
@@ -25,7 +25,7 @@ export class PrayerService {
   }
 
   async update(prayer: PrayerDto) {
-    return await this.PrayerRepository.update(prayer.prayerId, prayer);
+    return await this.PrayerRepository.update(prayer.id, prayer);
   }
 
   async remove(id) {

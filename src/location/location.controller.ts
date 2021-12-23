@@ -21,34 +21,34 @@ export class LocationController {
   }
 
   @Get()
-  async getAllRole(@Query('locationId') locationId: number) {
+  async getAllRole(@Query('id') id: number) {
     const Query: any = {};
 
-    if (locationId) {
-      Query.locationId = locationId;
+    if (id) {
+      Query.id = id;
     }
 
     const data = this.locationService.getAllRole(Query);
     return data;
   }
 
-  @Get(':locationId')
-  async getById(@Param('locationId') locationId: number) {
-    return this.locationService.getById(locationId);
+  @Get(':id')
+  async getById(@Param('id') id: number) {
+    return this.locationService.getById(id);
   }
 
-  @Put(':locationId')
+  @Put(':id')
   async update(
-    @Param('locationId') locationId,
+    @Param('id') id,
     @Body() locationDto: LocationDto,
   ) {
-    locationDto.locationId = Number(locationId);
-    console.log('update #' + locationDto.locationId);
+    locationDto.id = Number(id);
+    console.log('update #' + locationDto.id);
     return this.locationService.update(locationDto);
   }
 
-  @Delete(':locationId')
-  delete(@Param('locationId') [locationId]) {
-    return this.locationService.remove(locationId);
+  @Delete(':id')
+  delete(@Param('id') [id]) {
+    return this.locationService.remove(id);
   }
 }

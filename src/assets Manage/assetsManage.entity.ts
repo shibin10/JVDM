@@ -2,7 +2,10 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class AssetManage {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
   assetId: number;
 
   @Column()
@@ -10,4 +13,7 @@ export class AssetManage {
 
   @Column()
   quantity: number;
+
+  @Column()
+  locationId: number;
 }

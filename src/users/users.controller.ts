@@ -18,8 +18,8 @@ export class UserController {
 
   @Get()
   async getAllUsers(
-    @Query('roleId') roleId: number,
     @Query('status') status: string,
+    @Query('roleId') roleId: number,
   ) {
     const userQuery: any = {};
 

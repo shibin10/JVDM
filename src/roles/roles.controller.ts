@@ -21,31 +21,31 @@ export class RolesController {
   }
 
   @Get()
-  async getAllRole(@Query('roleId') roleId: number) {
+  async getAllRole(@Query('id') id: number) {
     const roleQuery: any = {};
 
-    if (roleId) {
-      roleQuery.roleId = roleId;
+    if (id) {
+      roleQuery.id = id;
     }
 
     const data = this.rolesService.getAllRole(roleQuery);
     return data;
   }
 
-  @Get(':roleId')
-  async getById(@Param('roleId') roleId: number) {
-    return this.rolesService.getById(roleId);
+  @Get(':id')
+  async getById(@Param('id') id: number) {
+    return this.rolesService.getById(id);
   }
 
-  @Put(':roleId')
-  async update(@Param('roleId') roleId, @Body() roleDto: RoleDto) {
-    roleDto.roleId = Number(roleId);
-    console.log('update #' + roleDto.roleId);
+  @Put(':id')
+  async update(@Param('id') id, @Body() roleDto: RoleDto) {
+    roleDto.id = Number(id);
+    console.log('update #' + roleDto.id);
     return this.rolesService.update(roleDto);
   }
 
-  @Delete(':roleId')
-  delete(@Param('roleId') [roleId]) {
-    return this.rolesService.remove(roleId);
+  @Delete(':id')
+  delete(@Param('id') [id]) {
+    return this.rolesService.remove(id);
   }
 }

@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ScheduleDto } from './dto/schedule-dto.dto';
-import { schedule } from './schedule.entity';
+import { Schedule } from './schedule.entity';
 
 @Injectable()
 export class ScheduleService {
   constructor(
-    @InjectRepository(schedule)
-    private scheduleRepository: Repository<schedule>,
+    @InjectRepository(Schedule)
+    private scheduleRepository: Repository<Schedule>,
   ) {}
 
   async create(scheduleDto: ScheduleDto) {
@@ -20,14 +20,11 @@ export class ScheduleService {
   }
 
   async update(scheduleDto: ScheduleDto) {
-    return await this.scheduleRepository.update(
-      scheduleDto.userId,
-      scheduleDto,
-    );
+    return await this.scheduleRepository.update(scheduleDto.id, scheduleDto);
   }
 
-  async remove(userId) {
-    return await this.scheduleRepository.delete(userId);
+  async remove(id) {
+    return await this.scheduleRepository.delete(id);
   }
 
   async getAllSchedule(query: any) {
@@ -35,6 +32,6 @@ export class ScheduleService {
   }
 
   async getById(id: number) {
-    return this.scheduleRepository.findOne({ where: { userId: id } });
+    return this.scheduleRepository.findOne({ where: { id: id } });
   }
 }

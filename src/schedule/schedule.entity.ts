@@ -1,16 +1,30 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Location } from '../location/location.entity';
 
 @Entity()
-export class schedule {
+export class Schedule {
   @PrimaryGeneratedColumn()
-  userId: number;
+  id: number;
 
   @Column()
-  prayerId: number;
+  userId: number;
 
   @Column()
   date: Date;
 
   @Column()
-  location: String;
+  prayerId: number;
+
+  @Column()
+  locationId: number;
+
+  // @ManyToMany(() => Location, (location) => location.schedule)
+  // @JoinTable()
+  // location: Location[];
 }

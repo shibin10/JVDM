@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
@@ -27,12 +27,17 @@ export class UserService {
     return await this.usersRepository.update(user.id, user);
   }
 
-  async deleteOne(id:number) {
+  async deleteOne(id: number) {
     return await this.usersRepository.delete(id);
   }
 
   async getAllUsers(query: any) {
-    console.log(query);
     return this.usersRepository.find({ where: query });
+  }
+
+  async findUser(username: string) {
+    return this.usersRepository.findOne({
+      where: { username: username },
+    });
   }
 }

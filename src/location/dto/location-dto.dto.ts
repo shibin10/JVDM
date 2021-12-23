@@ -1,4 +1,8 @@
 export class LocationDto {
-  locationId: number;
-  locationName: string;
+  id: number;
+  location: string;
+  pincode: number;
+  district: string;
+  state: string;
+  country: string;
 }

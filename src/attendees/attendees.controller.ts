@@ -39,20 +39,20 @@ export class AttendeesController {
     return data;
   }
 
-  @Get(':userId')
-  async getById(@Param('userId') id: number) {
+  @Get(':id')
+  async getById(@Param('id') id: number) {
     return this.attendeesService.getById(id);
   }
 
-  @Put(':prayerId')
-  async update(@Param('prayerId') prayerId, @Body() attendeeDto: AttendeeDto) {
-    attendeeDto.prayerId = Number(prayerId);
+  @Put(':id')
+  async update(@Param('id') id, @Body() attendeeDto: AttendeeDto) {
+    attendeeDto.id = Number(id);
     return this.attendeesService.update(attendeeDto);
   }
 
-  @Delete(':prayerId')
-  async delete(@Param('paryerId') prayerId, @Body() attendeeDto: AttendeeDto) {
-    attendeeDto.prayerId = Number(prayerId);
+  @Delete(':id')
+  async delete(@Param('id') id, @Body() attendeeDto: AttendeeDto) {
+    attendeeDto.id = Number(id);
     return this.attendeesService.remove(attendeeDto);
   }
 }

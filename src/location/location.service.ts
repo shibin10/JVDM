@@ -21,14 +21,14 @@ export class LocationService {
   }
 
   async update(location: LocationDto) {
-    return await this.locationRepository.update(location.locationId, location);
+    return await this.locationRepository.update(location.id, location);
   }
 
-  async remove(locationId) {
-    await this.locationRepository.delete(locationId);
+  async remove(id) {
+    await this.locationRepository.delete(id);
   }
 
   async getById(id: number) {
-    return this.locationRepository.findOne({ where: { locationId: id } });
+    return this.locationRepository.findOne({ where: { id: id } });
   }
 }

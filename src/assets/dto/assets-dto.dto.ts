@@ -1,5 +1,5 @@
 export class assetDto {
-  assetId: number;
+  id: number;
   name: string;
   quantity: number;
   company: string;

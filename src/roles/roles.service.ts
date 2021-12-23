@@ -21,14 +21,14 @@ export class RolesService {
   }
 
   async update(role: RoleDto) {
-    return await this.roleRepository.update(role.roleId, role);
+    return await this.roleRepository.update(role.id, role);
   }
 
-  async remove(roleId) {
-    await this.roleRepository.delete(roleId);
+  async remove(id) {
+    await this.roleRepository.delete(id);
   }
 
   async getById(id: number) {
-    return this.roleRepository.findOne({ where: { roleId: id } });
+    return this.roleRepository.findOne({ where: { id: id } });
   }
 }

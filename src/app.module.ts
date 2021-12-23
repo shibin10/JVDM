@@ -12,6 +12,12 @@ import { ScheduleModule } from './schedule/schedule.module';
 import { AssetsModule } from './assets/assets.module';
 import { AssetsManageModule } from './assets Manage/assets.module';
 import { LocationModule } from './location/location.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { UserService } from './users/users.service';
+import { User } from './users/user.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants';
 
 @Module({
   imports: [
@@ -19,14 +25,20 @@ import { LocationModule } from './location/location.module';
     UserModule,
     AssetsModule,
     TypeOrmModule.forRoot(TypeOrmConfig),
+    TypeOrmModule.forFeature([User]),
     AttendeesModule,
     RolesModule,
     AssetsManageModule,
     ScheduleModule,
     LocationModule,
+    AuthModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '60s' },
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UserService, AuthService],
 })
 export class AppModule {
   constructor(private connection: Connection) {}

@@ -28,7 +28,7 @@ export class PrayerController {
     const userQuery: any = {};
 
     if (prayerId) {
-      userQuery.prayerId = prayerId;
+      userQuery.id = prayerId;
     }
 
     const data = this.prayerService.getAllPrayer(userQuery);
@@ -42,8 +42,8 @@ export class PrayerController {
 
   @Put(':pid')
   async update(@Param('pid') pid, @Body() prayerDto: PrayerDto) {
-    prayerDto.prayerId = Number(pid);
-    console.log('update #' + prayerDto.prayerId);
+    prayerDto.id = Number(pid);
+    console.log('update #' + prayerDto.id);
     return this.prayerService.update(prayerDto);
   }
 
