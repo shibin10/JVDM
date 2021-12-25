@@ -19,16 +19,23 @@ export class UserController {
   @Get()
   async getAllUsers(
     @Query('status') status: string,
-    @Query('roleId') roleId: number,
+    @Query('roleId') roleId: string,
+    @Query('phone') phone: string,
   ) {
     const userQuery: any = {};
+
+    if (status) {
+      userQuery.status = status;
+    }
 
     if (roleId) {
       userQuery.roleId = roleId;
     }
-    if (status) {
-      userQuery.status = status;
+
+    if (phone) {
+      userQuery.phone = phone;
     }
+
     const data = this.UserService.getAllUsers(userQuery);
     return data;
   }
@@ -39,7 +46,7 @@ export class UserController {
   }
 
   @Get(':id')
-  async getById(@Param('users') id: number) {
+  async getById(@Param('id') id: number) {
     return this.UserService.getById(id);
   }
 

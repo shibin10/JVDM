@@ -18,6 +18,7 @@ import { UserService } from './users/users.service';
 import { User } from './users/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './auth/constants';
+import { BookingModule } from './counciling Booking/booking.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { jwtConstants } from './auth/constants';
     AssetsManageModule,
     ScheduleModule,
     LocationModule,
+    BookingModule,
     AuthModule,
     JwtModule.register({
       secret: jwtConstants.secret,
